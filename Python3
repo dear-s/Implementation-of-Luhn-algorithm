@@ -1,0 +1,47 @@
+def validate_credit_card_number(card_number):
+if(len(str(card_number))==16):
+    group1 = []
+    group1_double = []
+    after_group_double = []
+    group1_sum = 0
+    group2_sum = 0
+    group2 = []
+    total_final_sum = 0
+    s = str(card_number)
+    list1 = [int(i) for i in list(s)]
+    for i in range(14, -1, -2):
+        group1.append(list1[i])
+    for x in group1:
+        b = 0
+        b = x * 2
+        group1_double.append(b)
+    for j in group1_double:
+        if(j > 9):
+            sum_of_digits = 0
+            alias = str(j)
+            temp1 = alias[0]
+            temp2 = alias[1]
+            sum_of_digits = int(temp1) + int(temp2)
+            after_group_double.append(sum_of_digits)
+        else:
+            after_group_double.append(j)
+    for i in after_group_double:
+        group1_sum += i
+    for i in range(15, -1, -2):
+        group2.append(list1[i])
+    for i in group2:
+        group2_sum += i
+
+    total_final_sum = group1_sum + group2_sum
+
+    if(total_final_sum%10==0):
+        return True
+    else:
+        return False
+
+card_number= 1456734512345698 #4539869650133101  #1456734512345698 # #5239512608615007
+result=validate_credit_card_number(card_number)
+if(result):
+    print("credit card number is valid")
+else:
+    print("credit card number is invalid")
